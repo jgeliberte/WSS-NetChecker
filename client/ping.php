@@ -75,18 +75,23 @@
 
     //-------------------------
     $flag = true;
-    $WebSocketClient = new WebsocketClient('localhost', 5052);
+    $WebSocketClient = new WebsocketClient('www.dewslandslide.com', 5052);
 
     while ($flag == true) {
         $time_start = microtime(true); 
-        $toBeSent = (object) array("type"=>"ping");
-
-        $WebSocketClient->sendData(json_encode($toBeSent));
         $time_end = microtime(true);
-
+        $duration = $time_end-$time_start;
+        $hours = (int)($duration/60/60);
+        $minutes = (int)($duration/60)-$hours*60;
+        $seconds = (int)$duration-$hours*60*60-$minutes*60;
         $execution_time = ($time_end - $time_start)/60;
+        $toBeSent = (object) array("type"=>"ping","latency"=>$seconds);
+        $WebSocketClient->sendData(json_encode($toBeSent));
 
-        echo 'Total Execution Time: '.$execution_time.' Mins'."\n";
+
+
+
+        echo 'Total Execution Time: '.$seconds.' seconds.'."\n";
         sleep(1);
     }
 ?>
