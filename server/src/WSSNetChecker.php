@@ -2,9 +2,7 @@
 namespace MyApp;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
-
-
- 
+use MyApp\WSSNetCheckerModel;
 
 class WSSNetChecker implements MessageComponentInterface {
     protected $clients;
@@ -13,12 +11,8 @@ class WSSNetChecker implements MessageComponentInterface {
 
     public function __construct() {
         $this->clients = new \SplObjectStorage;
+        $this->wssModel = new WSSNetCheckerModel;
     }
-
-    //TODO: Resilience against Net Connection Loss
-    //Create a protocol for checking whether the message was sent to GSM.
-    //There should be a function that will attempt to send "PENDING" data
-    //  to GSM everytime there is a new connection.
 
     public function onOpen(ConnectionInterface $conn) {
         // Store the new connection to send messages to later

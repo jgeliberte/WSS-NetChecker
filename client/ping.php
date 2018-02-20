@@ -1,6 +1,7 @@
 <?php
 
     $servername = "localhost";
+    // $servername = "www.dewslandslide.com";
     $username = "root";
     $password = "senslope";
     $dbname = "senslopedb";
@@ -73,10 +74,9 @@
 
     }
 
-    //-------------------------
     $flag = true;
     $latency = 0;
-    $WebSocketClient = new WebsocketClient('www.dewslandslide.com', 5052);
+    $WebSocketClient = new WebsocketClient($servername, 5052);
 
     while ($flag == true) {
         $time_start = microtime(true);
