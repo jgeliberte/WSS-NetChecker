@@ -45,9 +45,9 @@ class WSSNetCheckerModel {
         $error_log_query = "CREATE TABLE error_logs (id int(11) NOT NULL AUTO_INCREMENT,module_id_fk int(11) DEFAULT NULL,
           error_id_fk int(11) DEFAULT NULL,PRIMARY KEY (id),KEY module_id_fk_idx (module_id_fk),KEY error_id_fk_idx (error_id_fk),CONSTRAINT error_id_fk FOREIGN KEY (error_id_fk) REFERENCES error_log_description (id) ON DELETE NO ACTION ON UPDATE NO ACTION,CONSTRAINT module_id_fk FOREIGN KEY (module_id_fk) REFERENCES error_log_modules (id) ON DELETE NO ACTION ON UPDATE NO ACTION) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 
-        if ($this->dbconn->query($error_log_description_query) === TRUE) {
+        if ($this->dbconn->query($error_log_modulees_query) === TRUE) {
             echo "Table 'error_log_description' exists!\n";
-            if ($this->dbconn->query($error_log_modulees_query) === TRUE) {
+            if ($this->dbconn->query($error_log_description_query) === TRUE) {
                 echo "Table 'error_log_modules_query' exists!\n";
                 if ($this->dbconn->query($error_log_query) === TRUE) {
                     echo "Table 'error_log' exists!\n";
