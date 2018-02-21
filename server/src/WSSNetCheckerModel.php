@@ -27,7 +27,12 @@ class WSSNetCheckerModel {
     }
 
     public function insertNewErrorLog($data) {
-
+        $query = "";
+        if ($this->dbconn->query($query) === TRUE) {
+           
+        } else {
+            die("Failed to add new error log: " . $this->dbconn->error." \n");
+        }   
     }
 
     public function initializeErrorLogsDB() {
@@ -50,10 +55,10 @@ class WSSNetCheckerModel {
                     echo "Error creating table 'error_log'!\n";
                 }
             } else {
-                echo "Error creating table 'error_log_modules_query'!\n";
+                echo "Error creating table 'error_log_modules'!\n";
             }
         } else {
-            die("Error creating table 'smsinbox': " . $this->dbconn->error);
+            echo "Error creating error log tables: ".$this->dbconn->error."\n";
         }
 
         echo "Initialization complete..\n";
@@ -61,7 +66,7 @@ class WSSNetCheckerModel {
 
     public function connectSenslopeDB() {
         $success = mysqli_select_db($this->dbconn, "senslopedb");
-        if (!$success) {
+        if ($success) {
             $this->initializeErrorLogsDB();
         } else {
             echo "Table for error logging exists!\n";
