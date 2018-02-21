@@ -44,7 +44,7 @@ class WSSNetCheckerModel {
 
     public function initializeErrorLogsDB() {
         echo "Initializing Error logs database..\n";
-        $error_log_description_query = "CREATE TABLE error_log_description (id int(11) NOT NULL AUTO_INCREMENT,module_id_fk int(11) DEFAULT NULL,timestamp date DEFAULT NULL,description varchar(45) DEFAULT NULL,PRIMARY KEY (id),KEY module_id_fk_idx (module_id_fk),
+        $error_log_description_query = "CREATE TABLE error_log_description (id int(11) NOT NULL AUTO_INCREMENT,module_id_fk int(11) DEFAULT NULL,timestamp datetime DEFAULT NULL,description varchar(45) DEFAULT NULL,PRIMARY KEY (id),KEY module_id_fk_idx (module_id_fk),
           CONSTRAINT module_id_fk_1 FOREIGN KEY (module_id_fk) REFERENCES error_log_modules (id) ON DELETE NO ACTION ON UPDATE NO ACTION) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 
         $error_log_modulees_query = "CREATE TABLE error_log_modules (id int(11) NOT NULL AUTO_INCREMENT,module_code varchar(45) DEFAULT NULL,module_name varchar(45) DEFAULT NULL,PRIMARY KEY (id)) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;";
