@@ -32,7 +32,7 @@ class WSSNetChecker implements MessageComponentInterface {
         } else {
             echo "Pinging.. \n";
             if ((int) $decodedText->latency > 1) {
-                $error_description =  "Latency: ".(int) $decodedText->latency;
+                $error_description =  "Latency: ".(int) $decodedText->latency." seconds";
                 $data = [
                     "timestamp" => date("Y-m-d H:i:s", time()),
                     "error_description" => $error_description
