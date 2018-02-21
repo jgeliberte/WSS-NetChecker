@@ -29,7 +29,7 @@ class WSSNetCheckerModel {
     public function insertNewErrorLog($data) {
         $status = "";
         $log_description_query = "INSERT INTO error_log_description VALUES (0,(SELECT id FROM error_log_modules WHERE module_code = 'CTBX'),'".$data['timestamp']."','".$data['error_description']."');";
-        if ($this->dbconn->query($query) === TRUE) {
+        if ($this->dbconn->query($log_description_query) === TRUE) {
            $log_query = "INSERT INTO error_logs VALUES (0,(SELECT id FROM error_log_modules WHERE module_code = 'CTBX'),(SELECT id FROM error_log_description WHERE timestamp = '".$data['timestamp']."'))";
            if ($this->dbconn->query($log_query) === TRUE) {
                 $status = "Error log entry successfully added..\n";
