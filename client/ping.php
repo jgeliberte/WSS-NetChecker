@@ -1,7 +1,7 @@
 <?php
 
-    $servername = "localhost";
-    // $servername = "www.dewslandslide.com";
+    // $servername = "localhost";
+    $servername = "www.dewslandslide.com";
     $username = "root";
     $password = "senslope";
     $dbname = "senslopedb";
