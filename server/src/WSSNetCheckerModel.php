@@ -27,12 +27,19 @@ class WSSNetCheckerModel {
     }
 
     public function insertNewErrorLog($data) {
-        $query = "";
+        $status = "";
+        $log_description_query = "INSERT INTO error_log_description VALUES (0,(SELECT id FROM error_log_modules WHERE module_code = 'CTBX'),'".$data['timestamp']."','".$data['error_descriptio']."');";
         if ($this->dbconn->query($query) === TRUE) {
-           
+           $log_query = "INSERT INTO error_logs VALUES (0,(SELECT id FROM error_log_modules WHERE module_code = 'CTBX'),(SELECT id FROM error_log_description WHERE timestamp = '".$data['timestamp']."'))";
+           if ($this->dbconn->query($log_query) === TRUE) {
+                $status = "Error log entry successfully added..\n";
+           } else {
+                $status = "Failed to add Error log entry..\n";
+           }
         } else {
-            die("Failed to add new error log: " . $this->dbconn->error." \n");
-        }   
+            $status = "Failed to add new error log: " . $this->dbconn->error." \n";
+        }
+        return $status;
     }
 
     public function initializeErrorLogsDB() {
@@ -58,7 +65,7 @@ class WSSNetCheckerModel {
                 echo "Error creating table 'error_log_modules'!\n";
             }
         } else {
-            echo "Error creating error log tables: ".$this->dbconn->error."\n";
+            echo "Error log tables already exists!\n";
         }
 
         echo "Initialization complete..\n";

@@ -32,7 +32,13 @@ class WSSNetChecker implements MessageComponentInterface {
         } else {
             echo "Pinging.. \n";
             if ((int) $decodedText->latency > 1) {
-                echo "Latency: ".(int) $decodedText->latency."\n";
+                $error_description =  "Latency: ".(int) $decodedText->latency;
+                $data = [
+                    "timestamp" => date("Y-m-d H:i:s", time()),
+                    "error_description" => $error_description
+                ];
+                echo $error_description."\n";
+                $this->wssModel->insertNewErrorLog($data);
             }
             $from->send(json_encode('connected')); 
         }
